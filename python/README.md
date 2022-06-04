@@ -1,1 +1,1 @@
-Here are things I've studied as Python.
+Here are things I've studied with Python.
