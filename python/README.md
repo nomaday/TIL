@@ -1,3 +1,2 @@
-## Python
-
-### Here are things I've studied with Python. 
+# Python
+Here are things I've studied with Python. 
