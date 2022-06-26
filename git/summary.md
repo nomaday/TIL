@@ -153,13 +153,15 @@ url을 일일이 적어주기 힘들기 때문에 ‘origin’ 으로 적어줌
     - REFACTOR: 코드 리펙토링
     - CHORE: 빌드 업무 수정, 패키지 매니저 수정(ex .gitignore 수정 같은 경우)
 
-예시  
+```
+예시)  
 feat: Add server.py  
 fix: Fix Typo server.py  
 docs: Add README.md, LICENSE  
 conf: Create .env, .gitignore, dockerfile  
 BREAKING CHANGE: Drop Support /api/v1  
 refactor: Refactor user classes  
+```
 
 ## .gitignore  
 .gitignore 는 git이 파일을 추적할 때, 어떤 파일이나 폴더 등을 추적하지 않도록 명시하기 위해 작성하며, 해당 문서에 작성된 리스트는 수정사항이 발생해도 git이 무시하게 됩니다.
