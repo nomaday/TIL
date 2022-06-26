@@ -223,7 +223,7 @@ Apache 재단이 만든 라이센스로, 특허권 관련 내용이 포함되어
 ---
 
 1. git bash에서 .dev/ 에 팀 깃허브 클론을 만들고 (`$ git clone {팀 깃허브 주소}`)
-2. 클론되서 생성된 'study' directory로 들어감 (`cd study`)
+2. 클론되서 생성된 'study' directory로 들어감 (`$ cd study`)
 3. 제가 사용할 새로운 branch 생성 (`$ git branch {브랜치명}`)
 4. `$ git switch {브랜치명}`
 5. `$ git push -u origin {브랜치명}`
