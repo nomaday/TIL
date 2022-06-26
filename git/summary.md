@@ -76,34 +76,42 @@ To block text, press `v` on normal mode
 ---
 
 # Git 실행 (add-commit-push)  
+
 git 설치 확인(`$ git -v`)  
+
 git 환경설정  
+
 `$ git config --global user.name "당신의유저네임"`  
+
 `$ git config --global user.email "당신의메일주소"`  
+
 `$ git config --global core.editor "vim"`  
+
 `$ git config --global core.pager "cat"`  
+
 lg alias 설정: johanmeiring/gist:3002458  
+
 `$ git config --list` 로 정상 설정 확인  
+
 수정이 필요할 경우, `$ vi ~/.gitconfig` 에서 수정 가능  
 
 ---
 
 > *Caution: **Do not git init** on any other directories*
 > 
+./dev 에서   
 
-./dev 에서 
+`$ git clone URL복사한것붙여넣기`  
 
-`$ git clone URL복사한것붙여넣기`
+`$ git status`  
 
-`$ git status`
+`$ touch hello.py` → Untracked file 생김 (red color)  
 
-`$ touch hello.py` → Untracked file 생김 (red color)
+`ls`  
 
-`ls`
+`$ git add hello.py`  → Changes to be committed:  new file : ______ (green color)  
 
-`$ git add hello.py`  → Changes to be committed:  new file : ______ (green color)
-
-`$ git commit hello.py` → vim editor로 접속됨
+`$ git commit hello.py` → vim editor로 접속됨  
 
 commit message 작성
 
@@ -145,28 +153,21 @@ url을 일일이 적어주기 힘들기 때문에 ‘origin’ 으로 적어줌
     - REFACTOR: 코드 리펙토링
     - CHORE: 빌드 업무 수정, 패키지 매니저 수정(ex .gitignore 수정 같은 경우)
 
-예시
+예시  
+feat: Add server.py  
+fix: Fix Typo server.py  
+docs: Add README.md, LICENSE  
+conf: Create .env, .gitignore, dockerfile  
+BREAKING CHANGE: Drop Support /api/v1  
+refactor: Refactor user classes  
 
-feat: Add server.py
-
-fix: Fix Typo server.py
-
-docs: Add README.md, LICENSE
-
-conf: Create .env, .gitignore, dockerfile
-
-BREAKING CHANGE: Drop Support /api/v1
-
-refactor: Refactor user classes
-
-## .gitignore
-
+## .gitignore  
 .gitignore 는 git이 파일을 추적할 때, 어떤 파일이나 폴더 등을 추적하지 않도록 명시하기 위해 작성하며, 해당 문서에 작성된 리스트는 수정사항이 발생해도 git이 무시하게 됩니다.
 특정 파일 확장자를 무시하거나 이름에 패턴이 존재하는 경우, 또는 특정 디렉토리 아래의 모든 파일을 무시할 수 있습니다.
 
-## LICENSE
+## LICENSE  
 
-가장 많이 사용하는 License
+가장 많이 사용하는 License  
 
 - **MIT License**
 MIT에서 만든 라이센스로, 모든 행동에 제약이 없으며, 저작권자는 소프트웨어와
@@ -219,11 +220,11 @@ Apache 재단이 만든 라이센스로, 특허권 관련 내용이 포함되어
 
 ---
 
-1. git bash에서 .dev/ 에 팀 깃허브 클론을 만들고 ($ git clone [https://github.com/yeardreamoff5/study.git](https://github.com/yeardreamoff5/study.git))
-2. 클론되서 생성된 'study' directory로 들어감 ($ cd study)
-3. 제가 사용할 새로운 branch 생성 ($ git branch ar_yds)
-4. $ git switch ar_yds
-5. $ git push -u origin ar_yds
+1. git bash에서 .dev/ 에 팀 깃허브 클론을 만들고 (`$ git clone {팀 깃허브 주소}`)
+2. 클론되서 생성된 'study' directory로 들어감 (`cd study`)
+3. 제가 사용할 새로운 branch 생성 (`$ git branch {브랜치명}`)
+4. `$ git switch {브랜치명}`
+5. `$ git push -u origin {브랜치명}`
 
 ---
 
@@ -249,20 +250,20 @@ Apache 재단이 만든 라이센스로, 특허권 관련 내용이 포함되어
 
 `$ git reset HEAD {filename}`   Unstaging
 
-⚠️ 협업 시, reset은 **worst case** 이다. 
+⚠️ 협업 시, reset은 **worst case** 이다.  
 
-(ex. 직전 3개의 commit을 삭제한 호, remote에 강제 push)
-다른 cloned repo에 존재하던 commit log로 인해 파일이 살아나거나, 과거 이력이 깔끔히 사라져 commit log tracking이 힘들어짐.
-⇒ solution: 잘못한 이력도 commit으로 박제하고 수정한 이력을 남기자!
+(ex. 직전 3개의 commit을 삭제한 후, remote에 강제 push)  
+다른 cloned repo에 존재하던 commit log로 인해 파일이 살아나거나, 과거 이력이 깔끔히 사라져 commit log tracking이 힘들어짐.  
+⇒ solution: 잘못한 이력도 commit으로 박제하고 수정한 이력을 남기자!  
 
-👍 **Best case: Revert**
+👍 **Best case: Revert**  
 
-**(**ex. 현재 HEAD에서 직전의 3개의 commit을 순서대로 거슬러 올라가 해당 내역에 대해 commit, push 수행)
+(ex. 현재 HEAD에서 직전의 3개의 commit을 순서대로 거슬러 올라가 해당 내역에 대해 commit, push 수행)
 
 ```bash
 $ git revert --no-commit HEAD~3..
 $ git commit
-$ git push origin <branch>
+$ git push origin {branch}
 ```
 
 잘못하기 전 과거로 돌아가 최신을 유지하면서 되돌렸다는 이력을 commit으로 남겨 모든 팀원이 이 사항을 공유하고 주지시킬 수 있음.
@@ -272,16 +273,12 @@ $ git push origin <branch>
 
 ---
 
-# Issue & Projects
+# Issue & Projects  
 
-- Issue : 프로젝트, 레포와 관계된 모든 해야할 일과 버그, 개선사항 등을 기록
-- Projects : 해야할 일의 진도에 따른 구성과 우선순위 지정
+- Issue : 프로젝트, 레포와 관계된 모든 해야할 일과 버그, 개선사항 등을 기록  
+- Projects : 해야할 일의 진도에 따른 구성과 우선순위 지정  
 
 
-# Trailing comma
-
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/d191d708-c2f7-4795-a907-1d623c25b63f/Untitled.png)
-
-‘tulip’   ,    이렇게 마지막 문장에 콤마를 미리 붙여넣으면, 추후에 내용 추가했을 때, 아래줄에 추가된 줄만 git에서 업데이트 된것으로 뜨기 때문에 위와 같이 작성하는 것이 좋다.
-
-똑같이 단어 한개 추가한건데 삭제/추가 히스토리가 생성되므로, 세번째 처럼 작성하는 것이 좋다.
+# Trailing comma  
+```‘tulip’ ,``` 
+이렇게 마지막 문장에 콤마를 미리 붙여넣으면, 추후에 내용 추가했을 때 아랫줄에 추가된 줄만 git에서 업데이트 된것으로 뜨기 때문에 이런식으로 작성하는 것이 좋다.  
