@@ -125,3 +125,77 @@ $$
 - PreLU (Parametric ReLU) : Leaky ReLU 기준으로 $\alpha$ 값을 학습의 대상이 되는 parameter $\theta$로 처리함
 
 ⇒ 현재 일반적으로 ReLU 계열이 많이 쓰이고 있고,  자연어처리에서는 Tanh 계열 쓰임
+
+<br>
+
+### Multi-Layer Perceptron (MLP, 다층 퍼셉트론) ≈ ANN 인공신경망
+
+- 하나의 Perceptron으로는 XOR 문제를 해결할 수 없었음
+- Layer가 쌓이면 쌓일 수록 복잡한 함수선(결정 경계)을 만들어 낼 수 있게 되었다.
+    
+    **Non-linear Activation function & Multi-Layer**
+    
+    점점 엄청나게 복잡하게 그려갈 수 있지만 그럴수록 Overfitting될 가능성이 커진다.
+    
+💡 **전통적인 머신러닝은 Feature와의 싸움이고, 딥러닝은 Overfitting과의 싸움이다!**
+
+
+### Artificial Neural Network (ANN)
+
+Perceptron을 모은 Layer를 깊이 방향으로 쌓아나가면서 복잡한 모델을 만들어내어 보다 더 어려운 문제를 풀어낼 수 있음
+
+- Input Layer 입력층
+- Hidden Layer 은닉층
+    - **Hidden Layer == Learnable Kernel** (학습 가능한 커널),  Hidden layer로 **대부분 ReLU** 사용함
+- Output Layer 출력층
+    - 결과값을 그대로 받아 Regression
+    - 2진 분류의 경우,
+        - **Sigmoid** (y값이 양성 클래스일 확률)를 거쳐 → **Binary Classification** ($y$값 = Class 1, 나머지 ($1-y$) = Class 0)
+        - **Softmax** 를 거쳐 → **K-Class Classification** (Class 0 or Class 1)   
+
+**인공신경망에서는 항상 $θ$ (Theta, parameters)가 주인공이다!**
+
+### Deep Neural Network (DNN)
+
+MLP 중에서도 Hidden Layer가 2개 이상인 인공신경망
+
+### Forward Propagation (Feedforward Neural Network)
+
+Input Layer에서 시작하여 순방향으로 계산해 나아가며 Output Layer까지 값을 전파해나가는 신경망
+
+***Hyper Parameters***
+
+- Layers 개수
+- Neurons 개수
+- Activation function
+
+***Feedforward 신경망의 학습*** 
+
+원하는 결과를 얻기 위해 **뉴런 사이의 적당한 가중치 $\theta$들을 알아내는 것** → Model의 Output과 실제 정답의 차이를 바탕으로 Cost function을 구성하고, Cost를 낮추도록 **Gradient Descent**를 적용하여 **최적의 가중치 $\theta$**를 찾아감
+
+### Back Propagation Algorithm (오차 역전파 알고리즘) == 신경망의 효율적인 학습 방법
+
+학습된 출력 값과 실제 값과의 차이인 **오차**를 계산하여 Feedforward 반대인 역방향으로 전파(Propagation)하는 알고리즘
+
+- Multi-Layer Perceptron으로 XOR 문제 해결 → 그러나 Layer 복잡해질수록 연산이 복잡해져서 현실적으로 매우 비효율적
+    
+이 문제를 해결하기 위해 **Back propagation** 알고리즘이 도입됨
+    - Forward 방향으로 한번 연산 
+    **→ 결과값 (오차 발생, Cost) 나옴 (cost func: `틀린 정도의 기울기`)** 
+    → **Cost를 역방향(Backward)**으로 **전달해가면서 Parameter Update!** 
+        (각 weight 마다 Cost에 미치는 영향을 계산해서 Cost 줄이도록 weight, bias update)
+    
+> **모델이 `틀린 정도`를 `역방향`으로 전달하여 ‘미분’하고 곱하고 더하는 것을 반복하여 Parameter($\theta$)를 갱신한다. (Reverse Feed-forward)**
+> 
+
+### Vanishing Gradient
+
+- Layer가 깊어질수록 앞선 오차 값이 역방향으로 뒤까지 전달되지 않는 문제 발생
+- 미분의 최대값이 0.25인 Sigmoid를 적용시 역방향으로 0.25보다 작은 값을 곱하고 더해가면서 오차값이 사라져 버림
+- 이로 인해 학습 속도가 크게 저하되거나 학습이 중지됨
+    
+  ⇒ ReLU function으로 Activation function을 적용하면서 해결됨
+
+
+
+
