@@ -197,5 +197,56 @@ Input Layer에서 시작하여 순방향으로 계산해 나아가며 Output Lay
   ⇒ ReLU function으로 Activation function을 적용하면서 해결됨
 
 
+## Neural Network Optimization
 
+### 1) Weight Initialization (가중치 초기화)
+
+Parameter(θ) 초기값에 따라 학습 결과 달라질 수 있기때문에 Parameter(θ)를 random하게 초기화하는 것은 좋지 않을 수 있다. 
+
+→ Perceptron의 Linear combination 결과값이 너무 커지거나 작아지지 않게 해주려는 것
+
+→ Vanishing gradient 혹은 Exploding gradient 문제를 줄일 수 있음
+
+- **Xavier Initializaton** (with Sigmoid or tanh): 보통 딥러닝 라이브러리에 Default parameter로 setting 되어있음
+    - 표준편차가 $\sqrt{\frac{1}{n}}$  인 정규분포 따르도록 가중치 초기화 (n = # of nodes of previous layer)
+    - 앞에 있는 perceptron (# of nodes) 개수가 많아질 수록 Parameter($θ$)값을 작게 줄여준다.
+    - 
+- **He initialization** (with ReLU)
+    - 활성화 함수가 ReLU 함수일 때 적용
+    - 표준편차가 $\sqrt{\frac{2}{n}}$  인 정규분포 따르도록 가중치 초기화
+
+### 2) Weight regularization (가중치 규제) - L1 규제 & L2 규제
+
+기존 Gradient Descent 계산 시 y축에 위치했던 Cost function은 Training data에 대해 모델이 발생시키는 Error값의 지표이다.
+
+- 모델이 복잡해질수록 θ 개수가 늘어나고 |θ| 커지는 경향성이 있음
+    
+    따라서 MSE(손실함수)를 그대로 활용하는 것이 아니라, Regularization Term을 더해서 `New Cost function; J(θ)`을 만든다.
+
+**Lambda** : Regularization Rate (Hyper-params), 정규화율
+
+- 스칼라 값
+- 정규화 함수의 상대적 중요도를 지정해준다.
+- 정규화율을 높이면 과적합 감소하지만 모델 정확성 떨어질 수 있음 (Underfitting)
+- θ의 개수가 아주 많은 신경망은 정규화율을 아주 작게 주기도 함
+- 절대값 그래프의 너비 or 원의 크기를 결정해줌 (lambda ↑ 이면 원의 크기 ↓)
+
+
+- **L1 regularization [Lasso]**
+    
+    $$
+    \lambda \sum_{i=1}^{k} |\theta|
+    $$
+    
+    크게 중요하지 않은 $x$ data (column)의 가중치($\theta$)를 정확히 $0$으로 만들어주어 모델에서 해당 특성을 배제하도록 함 ( ⇒ Feature selection 효과 )
+    
+- **L2 regularization [Ridge]**
+    
+    $$
+    \lambda \sum_{i=1}^{k} \theta^2_i
+    $$
+    
+    전반적으로 Overfitting을 줄여준다. 큰 값을 가진 가중치($\theta$)를 더욱 제약하는 효과가 있음
+    
+- **Elastic-Net :** Ridge & Lasso 모두 적용한 Cost Function
 
